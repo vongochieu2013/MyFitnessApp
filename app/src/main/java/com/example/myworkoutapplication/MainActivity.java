@@ -1,20 +1,13 @@
 package com.example.myworkoutapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.common.FirstPartyScopes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -22,91 +15,92 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.HashSet;
-
 public class MainActivity extends AppCompatActivity {
 
-    private Button SignUpButton;
-    private Button SignInButton;
-    private TextInputLayout emailMain;
-    private TextInputLayout passwordMain;
-    private TextView AttemptText;
+  private Button signUpButton;
+  private Button signInButton;
+  private TextInputLayout emailMain;
+  private TextInputLayout passwordMain;
+  private TextView attemptText;
 
-    String emailInput;
-    String passwordInput;
+  String emailInput;
+  String passwordInput;
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private int counter = 5;
+  private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+  private int counter = 5;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        SignInButton = findViewById(R.id.SignInButton);
-        SignUpButton = findViewById(R.id.SignUpButton);
-        emailMain = findViewById(R.id.emailMain);
-        passwordMain = findViewById(R.id.passwordMain);
-        AttemptText = findViewById(R.id.AttemptText);
-        AttemptText.setText("Attempts remaining: 5");
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    startActivity(new Intent(this, SignUpActivity.class));
+  }
 
-        mAuth.signOut();
+  public void setUp() {
+    signInButton = findViewById(R.id.SignInButton);
+    signUpButton = findViewById(R.id.SignUpButton);
+    emailMain = findViewById(R.id.emailMain);
+    passwordMain = findViewById(R.id.passwordMain);
+    attemptText = findViewById(R.id.AttemptText);
+    attemptText.setText("Attempts remaining: 5");
 
-        FirebaseUser user = mAuth.getCurrentUser() ;
-        if (user != null) {
-            finish();
-            startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
-        }
+    mAuth.signOut();
 
-        SignUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
-            }
-        });
-
-        SignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validateInfo();
-            }
-        });
-
+    FirebaseUser user = mAuth.getCurrentUser();
+    if (user != null) {
+      finish();
+      startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
     }
 
-    private void validateInfo() {
-        emailInput = emailMain.getEditText().getText().toString().trim();
-        passwordInput = passwordMain.getEditText().getText().toString().trim();
-        if (emailInput.isEmpty()) {
-            emailMain.setError("Email is required");
-            decreaseAttempt();
-            return;
-        }
-        if (passwordInput.isEmpty()) {
-            passwordMain.setError("Password is required");
-            decreaseAttempt();
-            return;
-        }
-        mAuth.signInWithEmailAndPassword(emailInput, passwordInput).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
-                } else {
-                    Toast.makeText(MainActivity.this, "Incorrect Email Address or Password", Toast.LENGTH_SHORT).show();
-                    decreaseAttempt();
-                }
-            }
-        });
-    }
+    signUpButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
+      }
+    });
 
-    private void decreaseAttempt() {
-        counter--;
-        AttemptText.setText("No of attempts remaining: " + counter);
-        if (counter == 0) {
-            SignInButton.setEnabled(false);
-        }
+    signInButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        validateInfo();
+      }
+    });
+  }
+
+  private void validateInfo() {
+    emailInput = emailMain.getEditText().getText().toString().trim();
+    passwordInput = passwordMain.getEditText().getText().toString().trim();
+    if (emailInput.isEmpty()) {
+      emailMain.setError("Email is required");
+      decreaseAttempt();
+      return;
     }
+    if (passwordInput.isEmpty()) {
+      passwordMain.setError("Password is required");
+      decreaseAttempt();
+      return;
+    }
+    mAuth.signInWithEmailAndPassword(emailInput, passwordInput).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+      @Override
+      public void onComplete(@NonNull Task<AuthResult> task) {
+        if (task.isSuccessful()) {
+          Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+          startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
+        } else {
+          Toast.makeText(MainActivity.this, "Incorrect Email Address or Password", Toast.LENGTH_SHORT).show();
+          decreaseAttempt();
+        }
+      }
+    });
+  }
+
+  private void decreaseAttempt() {
+    counter--;
+    attemptText.setText("No of attempts remaining: " + counter);
+    if (counter == 0) {
+      signInButton.setEnabled(false);
+    }
+  }
 
     /*
         @Override
