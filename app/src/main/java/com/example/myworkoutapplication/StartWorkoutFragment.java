@@ -12,51 +12,52 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class StartWorkoutFragment extends Fragment {
-    private Chronometer chronometer;
-    private Button startButton;
-    private Button pauseButton;
-    private Button resetButton;
-    private long pauseOffSet;
-    private boolean running;
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_startworkout, container, false);
-        chronometer = root.findViewById(R.id.chronometer);
-        startButton = root.findViewById(R.id.startwoButton);
-        pauseButton = root.findViewById(R.id.pausewoButton);
-        resetButton = root.findViewById(R.id.resetwoButton);
-        chronometer.setFormat("Time: %s");
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!running) {
-                    chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffSet);
-                    chronometer.start();
-                    running = true;
-                }
-            }
-        });
-        pauseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (running) {
-                    chronometer.stop();
-                    pauseOffSet = SystemClock.elapsedRealtime() - chronometer.getBase();
-                    running = false;
-                }
-            }
-        });
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!running) {
-                    chronometer.setBase(SystemClock.elapsedRealtime());
-                    pauseOffSet = 0;
-                }
-            }
-        });
+  private Chronometer chronometer;
+  private Button startButton;
+  private Button pauseButton;
+  private Button resetButton;
+  private long pauseOffSet;
+  private boolean running;
+
+  @Nullable
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View root = inflater.inflate(R.layout.fragment_startworkout, container, false);
+    chronometer = root.findViewById(R.id.chronometer);
+    startButton = root.findViewById(R.id.startwoButton);
+    pauseButton = root.findViewById(R.id.pausewoButton);
+    resetButton = root.findViewById(R.id.resetwoButton);
+    chronometer.setFormat("Time: %s");
+    chronometer.setBase(SystemClock.elapsedRealtime());
+    startButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if (!running) {
+          chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffSet);
+          chronometer.start();
+          running = true;
+        }
+      }
+    });
+    pauseButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if (running) {
+          chronometer.stop();
+          pauseOffSet = SystemClock.elapsedRealtime() - chronometer.getBase();
+          running = false;
+        }
+      }
+    });
+    resetButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if (!running) {
+          chronometer.setBase(SystemClock.elapsedRealtime());
+          pauseOffSet = 0;
+        }
+      }
+    });
 
         /*
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -70,7 +71,7 @@ public class StartWorkoutFragment extends Fragment {
         });
 
          */
-        return root;
-    }
+    return root;
+  }
 
 }
