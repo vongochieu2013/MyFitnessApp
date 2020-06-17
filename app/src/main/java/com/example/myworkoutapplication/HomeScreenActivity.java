@@ -8,20 +8,12 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeScreenActivity extends AppCompatActivity {
-  private String email;
-  private String username;
   private Bundle bundle = new Bundle();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_homescreen);
-    email = getIntent().getStringExtra("email");
-    username = getIntent().getStringExtra("username");
-    bundle.putString("email", email);
-    bundle.putString("username", username);
-
-
     BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
     bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
       @Override

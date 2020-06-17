@@ -26,7 +26,7 @@ public class StartWorkoutFragment extends Fragment {
     chronometer = root.findViewById(R.id.chronometer);
     startButton = root.findViewById(R.id.startwoButton);
     pauseButton = root.findViewById(R.id.pausewoButton);
-    resetButton = root.findViewById(R.id.resetwoButton);
+    resetButton = root.findViewById(R.id.resetButton);
     chronometer.setFormat("Time: %s");
     chronometer.setBase(SystemClock.elapsedRealtime());
     startButton.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +58,10 @@ public class StartWorkoutFragment extends Fragment {
         }
       }
     });
+    return root;
+  }
+}
+
 
         /*
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
@@ -71,7 +75,3 @@ public class StartWorkoutFragment extends Fragment {
         });
 
          */
-    return root;
-  }
-
-}

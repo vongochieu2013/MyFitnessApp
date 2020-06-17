@@ -16,6 +16,6 @@ public class FirebaseManager {
   }
 
   public Task<AuthResult> create(User user) {
-    return auth.createUserWithEmailAndPassword(user.getUsername(), user.getPassword());
+    return auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword());
   }
 }

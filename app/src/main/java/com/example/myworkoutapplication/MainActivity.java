@@ -2,96 +2,127 @@ package com.example.myworkoutapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
+  private static User currentUser;
   private Button signUpButton;
   private Button signInButton;
   private TextInputLayout emailMain;
   private TextInputLayout passwordMain;
   private TextView attemptText;
+  private static final String PASSWORD = "password";
 
   String emailInput;
   String passwordInput;
 
-  private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+  private FirebaseFirestore db = FirebaseFirestore.getInstance();
+  private static final String TAG = "TAG";
   private int counter = 5;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    startActivity(new Intent(this, SignUpActivity.class));
-  }
-
-  public void setUp() {
-    signInButton = findViewById(R.id.SignInButton);
-    signUpButton = findViewById(R.id.SignUpButton);
-    emailMain = findViewById(R.id.emailMain);
-    passwordMain = findViewById(R.id.passwordMain);
-    attemptText = findViewById(R.id.AttemptText);
-    attemptText.setText("Attempts remaining: 5");
-
-    mAuth.signOut();
-
-    FirebaseUser user = mAuth.getCurrentUser();
-    if (user != null) {
-      finish();
-      startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
-    }
-
+    setUp();
     signUpButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
       }
     });
-
     signInButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        validateInfo();
+        if (!validateEmptyEmail() | !validateEmptyPassword()) {
+          decreaseAttempt();
+          return;
+        }
+        final DocumentReference docRef = db.collection("users").document(emailInput);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+          @Override
+          public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            if (task.isSuccessful()) {
+              DocumentSnapshot document = task.getResult();
+              if (document.exists()) {
+                String correctPassword = document.getData().get(PASSWORD).toString();
+                validatePassword(passwordInput, correctPassword, document);
+              } else {
+                // Log.d("hieu", "No such document");
+                emailMain.setError("Incorrect email. Please try again.");
+              }
+            } else {
+              Log.d(TAG, "get failed with ", task.getException());
+            }
+          }
+        });
       }
     });
   }
 
-  private void validateInfo() {
+  public void setUp() {
+    emailMain = findViewById(R.id.emailMain);
+    passwordMain = findViewById(R.id.passwordMain);
+    attemptText = findViewById(R.id.AttemptText);
+    attemptText.setText("Attempts remaining: 5");
+    signInButton = findViewById(R.id.SignInButton);
+    signUpButton = findViewById(R.id.SignUpButton);
+  }
+
+  private boolean validateEmptyEmail() {
     emailInput = emailMain.getEditText().getText().toString().trim();
-    passwordInput = passwordMain.getEditText().getText().toString().trim();
     if (emailInput.isEmpty()) {
       emailMain.setError("Email is required");
-      decreaseAttempt();
-      return;
+      return false;
     }
+    return true;
+  }
+
+  private boolean validateEmptyPassword() {
+    passwordInput = passwordMain.getEditText().getText().toString().trim();
     if (passwordInput.isEmpty()) {
       passwordMain.setError("Password is required");
-      decreaseAttempt();
-      return;
+      return false;
     }
-    mAuth.signInWithEmailAndPassword(emailInput, passwordInput).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-      @Override
-      public void onComplete(@NonNull Task<AuthResult> task) {
-        if (task.isSuccessful()) {
-          Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-          startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
-        } else {
-          Toast.makeText(MainActivity.this, "Incorrect Email Address or Password", Toast.LENGTH_SHORT).show();
-          decreaseAttempt();
-        }
-      }
-    });
+    return true;
+  }
+
+  private void validatePassword(String passwordInput, String correctPassword, DocumentSnapshot document) {
+    if (passwordInput.equals(correctPassword)) {
+      Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+      currentUser = document.toObject(User.class);
+      /*
+      currentUser = new User(document.getData().get(EMAIL).toString()
+        ,document.getData().get(FULLNAME).toString()
+        , document.getData().get(PASSWORD).toString()
+        , document.getData().get(AGE).toString());
+
+       */
+      Intent intent = new Intent(getApplicationContext(), HomeScreenActivity.class);
+      startActivity(intent);
+    } else {
+      passwordMain.setError("Incorrect password. Please try again.");
+      decreaseAttempt();
+    }
   }
 
   private void decreaseAttempt() {
@@ -101,6 +132,13 @@ public class MainActivity extends AppCompatActivity {
       signInButton.setEnabled(false);
     }
   }
+
+  public static User getCurrentUser() {
+    return currentUser;
+  }
+
+}
+  /*
 
     /*
         @Override
@@ -167,57 +205,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                emailInput = data.getStringExtra("email");
-                String username = data.getStringExtra("username");
-                String password = data.getStringExtra("password");
-                String accountInfo = username + "//" + password;
-                accountSet.add(accountInfo);
-            }
-        }
-    }
-
-
-    private boolean validateInfo() {
-        usernameInput = usernameMain.getEditText().getText().toString().trim();
-        passwordInput = passwordMain.getEditText().getText().toString().trim();
-        String check = usernameInput + "//" + passwordInput;
-        if (accountSet.contains(check)) {
-            return true;
-        }
-        return false;
-    }
-
-    private void checkBox() {
-        if (mCheckBox.isChecked()) {
-            mEditor.putString(getString(R.string.check_box), "True");
-            mEditor.commit();
-
-            String name = emailMain.getEditText().getText().toString().trim();
-            mEditor.putString(getString(R.string.username), name);
-            mEditor.commit();
-
-            String password = passwordMain.getEditText().getText().toString().trim();
-            mEditor.putString(getString(R.string.password), password);
-            mEditor.commit();
-        } else {
-            mEditor.putString(getString(R.string.check_box), "False");
-            mEditor.commit();
-
-            mEditor.putString(getString(R.string.username), "");
-            mEditor.commit();
-
-            String password = passwordMain.getEditText().getText().toString().trim();
-            mEditor.putString(getString(R.string.password), "");
-            mEditor.commit();
-        }
-    }
-
      */
-
-}
