@@ -137,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
     return currentUser;
   }
 
-  //Hieu And Chris
-
 }
   /*
 

@@ -62,17 +62,10 @@ public class SignUpActivity extends AppCompatActivity {
           return;
         }
         Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-        final String emailInput = emailTextInput.getEditText().getText().toString().trim();
-        final String fullNameInput = fullNameTextInput.getEditText().getText().toString().trim();
-        String passwordInput = passwordTextInput.getEditText().getText().toString().trim();
-        int age = Integer.parseInt(ageTextInput.getEditText().getText().toString().trim());
-        int weight = Integer.parseInt(weightTextInput.getEditText().getText().toString().trim());
-        int height = Integer.parseInt(heightTextInput.getEditText().getText().toString().trim());
-        User newUser = new User(emailInput, fullNameInput, passwordInput, age, weight, height);
-        // Log.w(TAG, Thread.currentThread().getName());
+        User newUser = setUpUser();
         CollectionReference c = db.collection("users");
         // Log.w(TAG, c.getPath());
-        c.document(emailInput).set(newUser);
+        c.document(newUser.getEmail()).set(newUser);
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
       }
     });
@@ -89,9 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
     weightTextInput = findViewById(R.id.weightTextInput);
   }
 
-
-
-  private boolean validateEmail() {
+  public boolean validateEmail() {
     String emailInput = emailTextInput.getEditText().getText().toString().trim();
     if (emailInput.isEmpty()) {
       emailTextInput.setError("Field can't be empty");
@@ -105,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
   }
 
-  private boolean validateName() {
+  public boolean validateName() {
     String fullnameInput = fullNameTextInput.getEditText().getText().toString().trim();
     if (fullnameInput.isEmpty()) {
       fullNameTextInput.setError("Field can't be empty");
@@ -116,7 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
   }
 
-  private boolean validatePassword() {
+  public boolean validatePassword() {
     String passwordInput = passwordTextInput.getEditText().getText().toString().trim();
     if (passwordInput.isEmpty()) {
       passwordTextInput.setError("Field can't be empty");
@@ -128,6 +119,16 @@ public class SignUpActivity extends AppCompatActivity {
       passwordTextInput.setError(null);
       return true;
     }
+  }
+
+  public User setUpUser() {
+    final String emailInput = emailTextInput.getEditText().getText().toString().trim();
+    final String fullNameInput = fullNameTextInput.getEditText().getText().toString().trim();
+    String passwordInput = passwordTextInput.getEditText().getText().toString().trim();
+    int age = Integer.parseInt(ageTextInput.getEditText().getText().toString().trim());
+    int weight = Integer.parseInt(weightTextInput.getEditText().getText().toString().trim());
+    int height = Integer.parseInt(heightTextInput.getEditText().getText().toString().trim());
+    return new User(emailInput, fullNameInput, passwordInput, age, weight, height);
   }
 }
 
