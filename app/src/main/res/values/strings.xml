@@ -4,13 +4,9 @@
   <string name="username">com.example.myworkoutapplication.username</string>
   <string name="password">com.example.myworkoutapplication.password</string>
 
-  <string-array name="numbers">
-    <item>18</item>
-    <item>19</item>
-    <item>20</item>
-    <item>21</item>
-    <item>22</item>
-    <item>23</item>
-    <item>24</item>
+  <string-array name="mealType">
+    <item>Breakfast</item>
+    <item>Lunch</item>
+    <item>Dinner</item>
   </string-array>
 </resources>
