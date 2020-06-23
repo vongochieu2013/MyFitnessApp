@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="@drawable/bg_login"
+    android:background="@color/light_blue"
     android:padding="16dp">
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans_light"
-        android:text="Your workout journey starts here."
+        android:text="Your health is not monkey business."
         android:textSize="16sp" />
 
     <ImageView

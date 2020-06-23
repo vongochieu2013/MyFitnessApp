@@ -2,7 +2,6 @@ package com.example.myworkoutapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -12,20 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -58,13 +48,12 @@ public class SignUpActivity extends AppCompatActivity {
     confirmButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        if (!validateEmail() | !validateName() | !validatePassword()) {
+        if (!validateEmail() | !validateName() | !validatePassword() | !validateAge() | !validateHeight() | !validateWeight()) {
           return;
         }
         Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
         User newUser = setUpUser();
         CollectionReference c = db.collection("users");
-        // Log.w(TAG, c.getPath());
         c.document(newUser.getEmail()).set(newUser);
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
       }
@@ -82,6 +71,22 @@ public class SignUpActivity extends AppCompatActivity {
     weightTextInput = findViewById(R.id.weightTextInput);
   }
 
+  public boolean validateExistedEmail() {
+    String emailInput = emailTextInput.getEditText().getText().toString().trim();
+    final boolean[] result = new boolean[1];
+    db.collection("users").document(emailInput).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+      @Override
+      public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        if (task.getResult().exists()) {
+          result[0] = false;
+        } else {
+          result[0] = true;
+        }
+      }
+    });
+    return result[0];
+  }
+
   public boolean validateEmail() {
     String emailInput = emailTextInput.getEditText().getText().toString().trim();
     if (emailInput.isEmpty()) {
@@ -97,8 +102,8 @@ public class SignUpActivity extends AppCompatActivity {
   }
 
   public boolean validateName() {
-    String fullnameInput = fullNameTextInput.getEditText().getText().toString().trim();
-    if (fullnameInput.isEmpty()) {
+    String fullNameInput = fullNameTextInput.getEditText().getText().toString().trim();
+    if (fullNameInput.isEmpty()) {
       fullNameTextInput.setError("Field can't be empty");
       return false;
     } else {
@@ -117,6 +122,39 @@ public class SignUpActivity extends AppCompatActivity {
       return false;
     } else {
       passwordTextInput.setError(null);
+      return true;
+    }
+  }
+
+  public boolean validateAge() {
+    String ageInput = ageTextInput.getEditText().getText().toString().trim();
+    if (ageInput.isEmpty()) {
+      ageTextInput.setError("Field can't be empty");
+      return false;
+    } else {
+      ageTextInput.setError(null);
+      return true;
+    }
+  }
+
+  public boolean validateHeight() {
+    String heightInput = heightTextInput.getEditText().getText().toString().trim();
+    if (heightInput.isEmpty()) {
+      heightTextInput.setError("Field can't be empty");
+      return false;
+    } else {
+      heightTextInput.setError(null);
+      return true;
+    }
+  }
+
+  public boolean validateWeight() {
+    String weightInput = weightTextInput.getEditText().getText().toString().trim();
+    if (weightInput.isEmpty()) {
+      weightTextInput.setError("Field can't be empty");
+      return false;
+    } else {
+      weightTextInput.setError(null);
       return true;
     }
   }
@@ -183,38 +221,8 @@ public class SignUpActivity extends AppCompatActivity {
           });
       }
     });
-  /*
+  */
 
-    /*
-   Map<String, Object> data = new HashMap<>();
-        data.put(EMAIL, emailInput);
-        data.put(FULLNAME, fullNameInput);
-        data.put(PASSWORD, passwordInput);
-        // Log.w("hieu", Thread.currentThread().getName());
-        CollectionReference c = db.collection("users");
-        // Log.w("hieu", c.getPath());
-        c.document(emailInput)
-          .set(data)
-          .addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-              Log.w("hieu", "again " + Thread.currentThread().getName());
-            }
-          })
-          .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-              Log.w("hieu", "why" + e.getMessage());
-            }
-          });
-
-            private static final String FULLNAME = "fullName";
-  private static final String EMAIL = "email";
-  private static final String PASSWORD = "password";
-  private static final String AGE = "age";
-  private static final String WEIGHT = "weight";
-  private static final String HEIGHT = "height";
-     */
 
 
 
