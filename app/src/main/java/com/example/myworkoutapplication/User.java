@@ -6,21 +6,21 @@ public class User {
   private String fullName;
   private String password;
   private int age;
-  private int height;
   private int weight;
+  private int calories;
 
 
   public User() {
 
   }
 
-  public User(String email, String fullName, String password, int age, int weight, int height) {
+  public User(String email, String fullName, String password, int age, int weight, int calories) {
     this.email = email;
     this.fullName = fullName;
     this.password = password;
     this.age = age;
     this.weight = weight;
-    this.height = height;
+    this.calories = calories;
   }
 
   public String getEmail() {
@@ -55,12 +55,12 @@ public class User {
     this.age = age;
   }
 
-  public int getHeight() {
-    return height;
+  public int getCalories() {
+    return calories;
   }
 
-  public void setHeight(int height) {
-    this.height = height;
+  public void setCalories(int calories) {
+    this.calories = calories;
   }
 
   public int getWeight() {

@@ -2,6 +2,7 @@ package com.example.myworkoutapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -33,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
   private TextInputLayout fullNameTextInput;
   private TextInputLayout passwordTextInput;
   private TextInputLayout ageTextInput;
-  private TextInputLayout heightTextInput;
+  private TextInputLayout caloriesTextInput;
   private TextInputLayout weightTextInput;
   private Button confirmButton;
   public static final String TAG = "TAG";
@@ -48,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
     confirmButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        if (!validateEmail() | !validateName() | !validatePassword() | !validateAge() | !validateHeight() | !validateWeight()) {
+        if (!validateEmail() | !validateName() | !validatePassword() | !validateAge() | !validateWeight()) {
           return;
         }
         Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
@@ -67,8 +70,8 @@ public class SignUpActivity extends AppCompatActivity {
     passwordTextInput = findViewById(R.id.passwordTextInput);
     confirmButton = findViewById(R.id.confirmButton);
     ageTextInput = findViewById(R.id.ageTextInput);
-    heightTextInput = findViewById(R.id.heightTextInput);
     weightTextInput = findViewById(R.id.weightTextInput);
+    caloriesTextInput = findViewById(R.id.caloriesTextInput);
   }
 
   public boolean validateExistedEmail() {
@@ -77,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
     db.collection("users").document(emailInput).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
       @Override
       public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-        if (task.getResult().exists()) {
+        if (Objects.requireNonNull(task.getResult()).exists()) {
           result[0] = false;
         } else {
           result[0] = true;
@@ -99,6 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
       emailTextInput.setError(null);
       return true;
     }
+
   }
 
   public boolean validateName() {
@@ -137,17 +141,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
   }
 
-  public boolean validateHeight() {
-    String heightInput = heightTextInput.getEditText().getText().toString().trim();
-    if (heightInput.isEmpty()) {
-      heightTextInput.setError("Field can't be empty");
-      return false;
-    } else {
-      heightTextInput.setError(null);
-      return true;
-    }
-  }
-
   public boolean validateWeight() {
     String weightInput = weightTextInput.getEditText().getText().toString().trim();
     if (weightInput.isEmpty()) {
@@ -165,8 +158,11 @@ public class SignUpActivity extends AppCompatActivity {
     String passwordInput = passwordTextInput.getEditText().getText().toString().trim();
     int age = Integer.parseInt(ageTextInput.getEditText().getText().toString().trim());
     int weight = Integer.parseInt(weightTextInput.getEditText().getText().toString().trim());
-    int height = Integer.parseInt(heightTextInput.getEditText().getText().toString().trim());
-    return new User(emailInput, fullNameInput, passwordInput, age, weight, height);
+    int calories = 0;
+    if (!caloriesTextInput.getEditText().getText().toString().matches("")) {
+      calories = Integer.parseInt(caloriesTextInput.getEditText().getText().toString().trim());
+    }
+    return new User(emailInput, fullNameInput, passwordInput, age, weight, calories);
   }
 }
 
