@@ -85,21 +85,21 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ageTextInput"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordTextInput"
         android:layout_marginTop="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="Age"
             android:inputType="number">
 
         </com.google.android.material.textfield.TextInputEditText>
-
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,13 +107,15 @@
         android:id="@+id/weightTextInput"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ageTextInput"
+        android:layout_below="@+id/passwordTextInput"
+        android:layout_toRightOf="@id/ageTextInput"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint="Weight in kg"
+            android:hint="Weight in pound"
             android:inputType="number">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -121,18 +123,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/heightTextInput"
-        android:layout_width="150dp"
+        android:id="@+id/caloriesTextInput"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ageTextInput"
-        android:layout_toRightOf="@id/weightTextInput"
-        android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Height in cm"
+            android:hint="Calories you eat per day?"
             android:inputType="number">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -143,7 +143,7 @@
         android:id="@+id/confirmButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/weightTextInput"
+        android:layout_below="@+id/caloriesTextInput"
         android:layout_marginTop="10dp"
         android:text = "Confirm"
         android:background="@drawable/btn_bg"/>

@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     setUp();
+
+
+    
     signUpButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -67,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 String correctPassword = document.getData().get(PASSWORD).toString();
                 validatePassword(passwordInput, correctPassword, document);
               } else {
-                // Log.d("hieu", "No such document");
                 emailMain.setError("Incorrect email. Please try again.");
               }
             } else {
@@ -93,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
     if (emailInput.isEmpty()) {
       emailMain.setError("Email is required");
       return false;
+    } else {
+      emailMain.setError(null);
     }
     return true;
   }
@@ -102,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
     if (passwordInput.isEmpty()) {
       passwordMain.setError("Password is required");
       return false;
+    } else {
+      passwordMain.setError(null);
     }
     return true;
   }
@@ -127,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void decreaseAttempt() {
     counter--;
-    attemptText.setText("No of attempts remaining: " + counter);
+    attemptText.setText("Attempts remaining " + counter);
     if (counter == 0) {
       signInButton.setEnabled(false);
     }
