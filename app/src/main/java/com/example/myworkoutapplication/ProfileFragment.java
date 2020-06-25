@@ -21,7 +21,7 @@ public class ProfileFragment extends Fragment {
   private TextView displayFullName;
   private EditText displayAge;
   private EditText displayWeight;
-  private EditText displayHeight;
+  private EditText displayCalories;
   private Button confirmButton;
   private Button signOutButton;
   private User currentUser;
@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment {
     displayFullName = root.findViewById(R.id.displayFullName);
     displayAge = root.findViewById(R.id.displayAge);
     displayWeight = root.findViewById(R.id.displayWeight);
-    displayHeight = root.findViewById(R.id.displayHeight);
+    displayCalories = root.findViewById(R.id.displayCalories);
     confirmButton = root.findViewById(R.id.confirm_button);
     signOutButton = root.findViewById(R.id.signOut_button);
     currentUser = MainActivity.getCurrentUser();
@@ -70,19 +70,19 @@ public class ProfileFragment extends Fragment {
     displayFullName.setText(currentUser.getfullName());
     displayAge.setText(Integer.toString(currentUser.getAge()));
     displayWeight.setText(Integer.toString(currentUser.getWeight()));
-    displayHeight.setText(Integer.toString(currentUser.getHeight()));
+    displayCalories.setText(Integer.toString(currentUser.getCalories()));
   }
 
   private void displayAndSaveEnteredData() {
     int age = Integer.parseInt(displayAge.getText().toString());
     int weight = Integer.parseInt(displayWeight.getText().toString());
-    int height = Integer.parseInt(displayHeight.getText().toString());
+    int calories = Integer.parseInt(displayCalories.getText().toString());
     currentUser.setAge(age);
     currentUser.setWeight(weight);
-    currentUser.setHeight(height);
+    currentUser.setCalories(calories);
     docRef.update("age", age);
     docRef.update("weight", weight);
-    docRef.update("height", height);
+    docRef.update("calories", calories);
   }
 
 }

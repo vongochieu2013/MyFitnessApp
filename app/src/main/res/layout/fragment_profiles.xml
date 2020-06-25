@@ -172,18 +172,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans_light"
-                    android:text="Height:"
+                    android:text="Calories per day:"
                     android:textColor="#FFFFFF"
                     android:freezesText="true"
                     android:textSize="13sp" />
 
                 <EditText
-                    android:id="@+id/displayHeight"
+                    android:id="@+id/displayCalories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FFFFFF"
                     android:inputType="number"
-                    android:hint="Height in cm"
+                    android:hint="Calories per day"
                     android:freezesText="true"
                     android:textSize="18sp" />
 
