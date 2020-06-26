@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
+
+  
   private void validatePassword(String passwordInput, String correctPassword, DocumentSnapshot document) {
     if (passwordInput.equals(correctPassword)) {
       Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
