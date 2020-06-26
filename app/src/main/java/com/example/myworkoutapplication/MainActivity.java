@@ -39,14 +39,12 @@ public class MainActivity extends AppCompatActivity {
   private static final String TAG = "TAG";
   private int counter = 5;
 
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     setUp();
-
-
-    
     signUpButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
