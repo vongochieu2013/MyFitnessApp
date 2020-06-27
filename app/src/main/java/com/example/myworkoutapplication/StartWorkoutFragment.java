@@ -1,5 +1,6 @@
 package com.example.myworkoutapplication;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ public class StartWorkoutFragment extends Fragment {
   private EditText workOutTypeText;
   private long pauseOffSet;
   private boolean running;
+  private MediaPlayer ring;
   private FirebaseFirestore db = FirebaseFirestore.getInstance();
   private User currentUser = MainActivity.getCurrentUser();
 
@@ -37,6 +39,8 @@ public class StartWorkoutFragment extends Fragment {
         if (!running) {
           chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffSet);
           chronometer.start();
+          ring = MediaPlayer.create(getContext(), R.raw.pop_workoutsong);
+          ring.start();
           running = true;
         }
       }
@@ -47,6 +51,7 @@ public class StartWorkoutFragment extends Fragment {
         if (running) {
           chronometer.stop();
           pauseOffSet = SystemClock.elapsedRealtime() - chronometer.getBase();
+          ring.pause();
           running = false;
         }
       }
@@ -61,6 +66,7 @@ public class StartWorkoutFragment extends Fragment {
           Toast.makeText(getContext(), "At " + date + "\nYou did a " + workoutType + " workout in: " + chroText, Toast.LENGTH_LONG).show();
           setUserHistory(date, chroText, workoutType);
           chronometer.setBase(SystemClock.elapsedRealtime());
+          ring.stop();
           pauseOffSet = 0;
         }
       }
@@ -75,6 +81,7 @@ public class StartWorkoutFragment extends Fragment {
     resetButton = root.findViewById(R.id.resetButton);
     workOutTypeText = root.findViewById(R.id.workOutType);
     chronometer.setFormat("Time: %s");
+    ring.stop();
     chronometer.setBase(SystemClock.elapsedRealtime());
   }
 
