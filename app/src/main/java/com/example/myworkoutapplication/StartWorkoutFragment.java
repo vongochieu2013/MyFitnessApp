@@ -24,7 +24,7 @@ public class StartWorkoutFragment extends Fragment {
   private EditText workOutTypeText;
   private long pauseOffSet;
   private boolean running;
-  private MediaPlayer ring;
+  private MediaPlayer player;
   private FirebaseFirestore db = FirebaseFirestore.getInstance();
   private User currentUser = MainActivity.getCurrentUser();
 
@@ -39,8 +39,7 @@ public class StartWorkoutFragment extends Fragment {
         if (!running) {
           chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffSet);
           chronometer.start();
-          ring = MediaPlayer.create(getContext(), R.raw.pop_workoutsong);
-          ring.start();
+          playMusic();
           running = true;
         }
       }
@@ -51,7 +50,7 @@ public class StartWorkoutFragment extends Fragment {
         if (running) {
           chronometer.stop();
           pauseOffSet = SystemClock.elapsedRealtime() - chronometer.getBase();
-          ring.pause();
+          pauseMusic();
           running = false;
         }
       }
@@ -66,13 +65,14 @@ public class StartWorkoutFragment extends Fragment {
           Toast.makeText(getContext(), "At " + date + "\nYou did a " + workoutType + " workout in: " + chroText, Toast.LENGTH_LONG).show();
           setUserHistory(date, chroText, workoutType);
           chronometer.setBase(SystemClock.elapsedRealtime());
-          ring.stop();
+          stopMusic();
           pauseOffSet = 0;
         }
       }
     });
     return root;
   }
+
 
   public void setData(View root) {
     chronometer = root.findViewById(R.id.chronometer);
@@ -81,7 +81,6 @@ public class StartWorkoutFragment extends Fragment {
     resetButton = root.findViewById(R.id.resetButton);
     workOutTypeText = root.findViewById(R.id.workOutType);
     chronometer.setFormat("Time: %s");
-    ring.stop();
     chronometer.setBase(SystemClock.elapsedRealtime());
   }
 
@@ -90,6 +89,37 @@ public class StartWorkoutFragment extends Fragment {
     currentUser = MainActivity.getCurrentUser();
     String historyName = "history" + "-" + currentUser.getEmail();
     db.collection(historyName).add(currentUserHistory);
+  }
+
+
+  public void playMusic() {
+    if (player == null) {
+      player = MediaPlayer.create(getContext(), R.raw.pop_workoutsong);
+      player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+          stopPlayer();
+        }
+      });
+    }
+    player.start();
+  }
+
+  public void pauseMusic() {
+    if (player != null) {
+      player.pause();
+    }
+  }
+
+  public void stopMusic() {
+    stopPlayer();
+  }
+
+  private void stopPlayer() {
+    if (player != null) {
+      player.release();
+      player = null;
+    }
   }
 }
 
