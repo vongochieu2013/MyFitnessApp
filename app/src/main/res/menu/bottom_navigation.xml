@@ -6,20 +6,19 @@
         android:title="Home" />
 
     <item
+        android:id="@+id/nav_runningtracker"
+        android:icon = "@drawable/ic_baseline_add_24"
+        android:title="Running Tracker" />
+    <item
         android:id="@+id/nav_caloriecounter"
         android:icon = "@drawable/ic_baseline_fastfood_24"
         android:title="Calorie Counter" />
 
 
     <item
-        android:id="@+id/nav_startworkout"
-        android:icon = "@drawable/ic_baseline_add_24"
-        android:title="Start Workout" />
-
-    <item
-        android:id="@+id/nav_history"
-        android:icon = "@drawable/ic_baseline_history_24"
-        android:title="History" />
+        android:id="@+id/nav_workoutcompanion"
+        android:icon = "@drawable/ic_baseline_fitness_center_24"
+        android:title="Workout Companion" />
 
     <item
         android:id="@+id/nav_profiles"

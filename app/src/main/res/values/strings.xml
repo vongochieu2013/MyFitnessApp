@@ -9,4 +9,11 @@
     <item>Lunch</item>
     <item>Dinner</item>
   </string-array>
+
+  <string-array name="workoutType">
+    <item>Walk</item>
+    <item>Jog</item>
+    <item>Run</item>
+    <item>Sprint</item>
+  </string-array>
 </resources>

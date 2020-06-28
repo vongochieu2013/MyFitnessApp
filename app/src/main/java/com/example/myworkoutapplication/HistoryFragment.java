@@ -46,10 +46,12 @@ public class HistoryFragment extends Fragment {
           String workoutType = userHistory.getWorkoutType();
           Date date = userHistory.getDate();
           String time = userHistory.getTime();
+          double distance = userHistory.getDistance();
           DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
           String strDate = dateFormat.format(date);
           data += "The workout is: " + workoutType;
           data += "\nThe date is: " + strDate + "\nThe time workout is: " + time;
+          data += "\nThe distance is: " + distance + " miles";
           data += "\n\n";
         }
         textViewData.setText(data);
