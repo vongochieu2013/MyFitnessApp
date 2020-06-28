@@ -26,10 +26,10 @@ public class HomeScreenActivity extends AppCompatActivity {
           case R.id.nav_caloriecounter:
             selectedFragment = new CalorieCounterFragment();
             break;
-          case R.id.nav_startworkout:
+          case R.id.nav_runningtracker:
             selectedFragment = new StartWorkoutFragment();
             break;
-          case R.id.nav_history:
+          case R.id.nav_workoutcompanion:
             selectedFragment = new HistoryFragment();
             break;
           case R.id.nav_profiles:
