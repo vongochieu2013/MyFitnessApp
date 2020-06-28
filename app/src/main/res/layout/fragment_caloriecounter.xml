@@ -27,22 +27,29 @@
                     android:text="Calorie Counter"
                     android:textSize="24dp" />
 
-                <Spinner
-                    android:id="@+id/spinner2"
+                <EditText
+                    android:id="@+id/mealDescriptionCCText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/mealType" />
+                    android:hint="input meal description" />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
+                    android:id="@+id/caloriesCCText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Input amount of calories" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/submitCCButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Submit" />
+
+                <TextView
+                    android:id="@+id/CCtextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="497dp"
+                    android:text="TextView" />
 
             </LinearLayout>
 
