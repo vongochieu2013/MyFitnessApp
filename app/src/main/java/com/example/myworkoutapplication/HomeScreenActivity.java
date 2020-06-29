@@ -30,7 +30,7 @@ public class HomeScreenActivity extends AppCompatActivity {
             selectedFragment = new StartWorkoutFragment();
             break;
           case R.id.nav_workoutcompanion:
-            selectedFragment = new HistoryFragment();
+            selectedFragment = new WorkoutCompanionFragment();
             break;
           case R.id.nav_profiles:
             selectedFragment = new ProfileFragment();

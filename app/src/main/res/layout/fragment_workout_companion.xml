@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    tools:context=".WorkoutCompanionFragment"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Workout Companion"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="What workout did you do today?"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/PushButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Push" />
+
+        <Button
+            android:id="@+id/PullButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pull" />
+
+        <Button
+            android:id="@+id/LegsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Legs" />
+
+        <TextView
+            android:id="@+id/WClog"
+            android:layout_width="match_parent"
+            android:layout_height="518dp"
+            android:text="this is where WC log history will be diplayed once loadNotes() method is corrected"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</LinearLayout>
