@@ -13,8 +13,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class ProfileFragment extends Fragment {
   private TextView displayEmail;
@@ -24,6 +30,7 @@ public class ProfileFragment extends Fragment {
   private EditText displayCalories;
   private Button confirmButton;
   private Button signOutButton;
+  private Button deleteAccountButton;
   private User currentUser;
 
   private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -50,6 +57,14 @@ public class ProfileFragment extends Fragment {
         Toast.makeText(getContext(), "Sign out Successful", Toast.LENGTH_SHORT).show();
       }
     });
+    deleteAccountButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        docRef.delete();
+        startActivity(new Intent(getActivity(), MainActivity.class));
+        Toast.makeText(getContext(), "Delete Account Successful", Toast.LENGTH_SHORT).show();
+      }
+    });
     return root;
   }
 
@@ -61,6 +76,7 @@ public class ProfileFragment extends Fragment {
     displayCalories = root.findViewById(R.id.displayCalories);
     confirmButton = root.findViewById(R.id.confirm_button);
     signOutButton = root.findViewById(R.id.signOut_button);
+    deleteAccountButton = root.findViewById(R.id.deleteAccount_button);
     currentUser = MainActivity.getCurrentUser();
     docRef = db.collection("users").document(currentUser.getEmail());
   }
@@ -84,5 +100,6 @@ public class ProfileFragment extends Fragment {
     docRef.update("weight", weight);
     docRef.update("calories", calories);
   }
+
 
 }
