@@ -11,15 +11,16 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="23dp"
+                android:layout_marginStart="14dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/open_sans_bold"
+                android:fontFamily="@font/bangers"
                 android:text="Calories Counter History"
-                android:textSize="24dp" />
+                android:textSize="30sp" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -44,21 +45,21 @@
 
     <Button
         android:id="@+id/CCGoBackButton"
-        android:background="@drawable/btn_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:layout_marginLeft="30dp"
-        android:text="Go Back" />
+        android:layout_marginTop="600dp"
+        android:background="@drawable/btn_bg"
+        android:text="back" />
 
     <Button
         android:id="@+id/CCNextButton"
-        android:background="@drawable/btn_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:layout_marginLeft="100dp"
+        android:layout_marginTop="60dp"
         android:layout_toRightOf="@+id/CCGoBackButton"
-        android:text="Next" />
+        android:background="@drawable/btn_bg"
+        android:text="next" />
 
 </RelativeLayout>

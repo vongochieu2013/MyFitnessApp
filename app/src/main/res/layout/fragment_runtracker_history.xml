@@ -22,7 +22,7 @@
                 android:textSize="24dp" />
         </RelativeLayout>
     </RelativeLayout>
-    
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,8 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="130dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="130dp"
+        android:fontFamily="@font/bangers"
         android:text="\tDate" />
 
     <TextView
@@ -47,8 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="130dp"
         android:layout_marginLeft="110dp"
+        android:layout_marginTop="130dp"
+        android:fontFamily="@font/bangers"
         android:text="\tTime\nWorkout" />
 
     <TextView
@@ -57,8 +59,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="130dp"
         android:layout_marginLeft="200dp"
+        android:layout_marginTop="130dp"
+        android:fontFamily="@font/bangers"
         android:text="Workout\n\t Type" />
 
     <TextView
@@ -67,27 +70,28 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="130dp"
         android:layout_marginLeft="300dp"
+        android:layout_marginTop="130dp"
+        android:fontFamily="@font/bangers"
         android:text="Distance\n\t(mile)" />
 
     <Button
         android:id="@+id/RTGoBackButton"
-        android:background="@drawable/btn_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:layout_marginLeft="30dp"
-        android:text="Go Back" />
+        android:layout_marginTop="60dp"
+        android:background="@drawable/btn_bg"
+        android:text="back" />
 
     <Button
         android:id="@+id/RTNextButton"
-        android:background="@drawable/btn_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:layout_marginLeft="100dp"
+        android:layout_marginTop="60dp"
         android:layout_toRightOf="@+id/RTGoBackButton"
-        android:text="Next" />
+        android:background="@drawable/btn_bg"
+        android:text="next" />
 
 </RelativeLayout>

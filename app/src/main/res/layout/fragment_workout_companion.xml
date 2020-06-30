@@ -21,28 +21,48 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="42dp" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers"
             android:text="What workout did you do today?"
-            android:textSize="16sp"/>
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="38dp" />
 
         <Button
             android:id="@+id/PushButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Push" />
+            android:layout_height="77dp"
+            android:backgroundTint="#00FFFFFF"
+            android:fontFamily="@font/bangers"
+            android:text="Push"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/PullButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pull" />
+            android:layout_height="72dp"
+            android:backgroundTint="#00FFFFFF"
+            android:fontFamily="@font/bangers"
+            android:text="Pull"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/LegsButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Legs" />
+            android:layout_height="73dp"
+            android:backgroundTint="#00FFFFFF"
+            android:fontFamily="@font/bangers"
+            android:text="Legs"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/WClog"

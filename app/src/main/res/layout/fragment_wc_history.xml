@@ -44,11 +44,11 @@
 
     <Button
         android:id="@+id/WCGoBackButton"
-        android:background="@drawable/btn_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:layout_marginLeft="30dp"
-        android:text="Go Back" />
+        android:layout_marginTop="60dp"
+        android:background="@drawable/btn_bg"
+        android:text="go back" />
 
 </RelativeLayout>
