@@ -1,30 +1,13 @@
 package com.example.myworkoutapplication;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class HistoryFragment extends Fragment {
   private CardView RTHistoryButton;
@@ -70,6 +53,5 @@ public class HistoryFragment extends Fragment {
     RTHistoryButton = root.findViewById(R.id.RTHistoryButton);
     CCHistoryButton = root.findViewById(R.id.CCHistoryButton);
     WCHistoryButton = root.findViewById(R.id.WCHistoryButton);
-
   }
 }

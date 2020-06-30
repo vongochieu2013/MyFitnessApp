@@ -5,9 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,27 +20,23 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class RunningTrackerHistoryFragment extends Fragment {
   private FirebaseFirestore db;
   private CollectionReference userHistory;
-  private TextView textViewData;
   private Button goBackButton;
   private Button nextButton;
   private User currentUser;
+  private ArrayList<UserHistory> peopleList;
+  private ListView mListView;
   private static String DATE = "date";
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View root = inflater.inflate(R.layout.fragment_runtracker_history, container, false);
-    textViewData = root.findViewById(R.id.text_view_data);
-    goBackButton = root.findViewById(R.id.RTGoBackButton);
-    nextButton = root.findViewById(R.id.RTNextButton);
-    setDataToDatabase();
+    setUpData(root);
     userHistory
       .orderBy(DATE, Query.Direction.DESCENDING)
       .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -51,18 +45,10 @@ public class RunningTrackerHistoryFragment extends Fragment {
         String data = "";
         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
           UserHistory userHistory = documentSnapshot.toObject(UserHistory.class);
-          String workoutType = userHistory.getWorkoutType();
-          Date date = userHistory.getDate();
-          String time = userHistory.getTime();
-          double distance = userHistory.getDistance();
-          DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-          String strDate = dateFormat.format(date);
-          data += "The workout is: " + workoutType;
-          data += "\nThe date is: " + strDate + "\nThe time workout is: " + time;
-          data += "\nThe distance is: " + distance + " miles";
-          data += "\n\n";
+          peopleList.add(userHistory);
         }
-        textViewData.setText(data);
+        RunningTrackerListAdapter adapter = new RunningTrackerListAdapter(getContext(), R.layout.adapter_runhistory_view_layout, peopleList);
+        mListView.setAdapter(adapter);
       }
     });
 
@@ -86,16 +72,18 @@ public class RunningTrackerHistoryFragment extends Fragment {
       }
     });
 
-
-
     return root;
   }
 
-  public void setDataToDatabase() {
+  private void setUpData(View root) {
+    goBackButton = root.findViewById(R.id.RTGoBackButton);
+    nextButton = root.findViewById(R.id.RTNextButton);
+    mListView = root.findViewById(R.id.listView);
+    peopleList = new ArrayList<>();
     db = FirebaseFirestore.getInstance();
     currentUser = MainActivity.getCurrentUser();
     String historyName = "history" + "-" + currentUser.getEmail();
     userHistory = db.collection(historyName);
-
   }
 }
+
