@@ -2,6 +2,7 @@ package com.example.myworkoutapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,17 +32,14 @@ public class WorkoutCompanionListAdapter extends ArrayAdapter<UserWC> {
     public View getView(int position, View convertView, ViewGroup parent) {
         //get the persons information
 
-        String workouttype = getItem(position).getWorkoutType();
-        String workjoutdesc = getItem(position).getWorkoutDesc();
+        String workoutType = getItem(position).getWorkoutType();
+        String workoutDesc = getItem(position).getWorkoutDesc();
         int reps1 = getItem(position).getRep1();
-        String stringreps1 = Integer.toString(reps1);
         int reps2 = getItem(position).getRep2();
-        String stringreps2 = Integer.toString(reps2);
-        int reps3 = getItem(position).getRep1();
-        String stringreps3 = Integer.toString(reps3);
+        int reps3 = getItem(position).getRep3();
 
         Date date = getItem(position).getDate();
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat DateFor = new SimpleDateFormat("MM/dd/yyyy");
         String stringDate = DateFor.format(date);
 
         String strDateFormat = "hh:mm:ss a";
@@ -51,13 +49,13 @@ public class WorkoutCompanionListAdapter extends ArrayAdapter<UserWC> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        displayDataToScreen(convertView, stringDate, formattedDate, workouttype, workjoutdesc, stringreps1, stringreps2, stringreps3);
+        displayDataToScreen(convertView, stringDate, formattedDate, workoutType, workoutDesc, reps1, reps2, reps3);
 
         return convertView;
     }
 
     @SuppressLint("SetTextI18n")
-    public void displayDataToScreen(View convertView, String stringDate, String formattedDate,  String workouttype, String workjoutdesc, String stringreps1, String stringreps2, String stringreps3){
+    public void displayDataToScreen(View convertView, String stringDate, String formattedDate,  String workouttype, String workjoutdesc, int reps1, int reps2, int reps3){
         TextView tvdate = convertView.findViewById(R.id.wctextView1);
         TextView tvcurrenttime = convertView.findViewById(R.id.wctextView2);
         TextView tvworktype = convertView.findViewById(R.id.wctextView3);
@@ -72,12 +70,12 @@ public class WorkoutCompanionListAdapter extends ArrayAdapter<UserWC> {
         tvcurrenttime.setText(formattedDate);
         tvworktype.setText(workouttype);
         tvworkdesc.setText(workjoutdesc);
-        tvset1.setText("Set 1: ");
-        tvset2.setText("Set 2: ");
-        tvset3.setText("Set 3: ");
-        tvrep1.setText(stringreps1);
-        tvrep2.setText(stringreps2);
-        tvrep3.setText(stringreps3);
+        tvset1.setText("Set 1:");
+        tvset2.setText("Set 2:");
+        tvset3.setText("Set 3:");
+        tvrep1.setText(Integer.toString(reps1));
+        tvrep2.setText(Integer.toString(reps2));
+        tvrep3.setText(Integer.toString(reps3));
 
 
     }

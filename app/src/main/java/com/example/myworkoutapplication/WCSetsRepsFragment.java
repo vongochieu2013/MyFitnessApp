@@ -17,8 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class WC_sets_reps_fragment extends Fragment  {
-
+public class WCSetsRepsFragment extends Fragment  {
     private EditText description;
     private EditText s1Reps;
     private EditText s2Reps;
@@ -34,14 +33,10 @@ public class WC_sets_reps_fragment extends Fragment  {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Date currentTime = Calendar.getInstance().getTime();
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_wc_sets_reps, container, false);
         setData(root);
-        WCdesc = "";
-        WCtype = "";
         Bundle bundle = getArguments();
         if(bundle != null){
             WCtype = bundle.getString("woType");
@@ -50,10 +45,9 @@ public class WC_sets_reps_fragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 WCdesc = description.getText().toString().trim();
-                S1reps = Integer.parseInt(s1Reps.getText().toString());
-                S2reps = Integer.parseInt(s2Reps.getText().toString());
-                S3reps = Integer.parseInt(s3Reps.getText().toString());
-
+                S1reps = Integer.parseInt(s1Reps.getText().toString().trim());
+                S2reps = Integer.parseInt(s2Reps.getText().toString().trim());
+                S3reps = Integer.parseInt(s3Reps.getText().toString().trim());
                setWClog(WCtype, WCdesc, currentTime, S1reps, S2reps, S3reps);
             }
         });
@@ -79,10 +73,4 @@ public class WC_sets_reps_fragment extends Fragment  {
         String WCName = "WClog" + "-" + currUser.getEmail();
         db.collection(WCName).add(currWCUser);
     }
-
-
-
-
-
-
 }

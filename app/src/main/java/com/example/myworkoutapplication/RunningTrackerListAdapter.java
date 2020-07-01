@@ -34,7 +34,7 @@ public class RunningTrackerListAdapter extends ArrayAdapter<UserHistory> {
     String workoutType = getItem(position).getWorkoutType();
     double distance = getItem(position).getDistance();
 
-    SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat DateFor = new SimpleDateFormat("MM/dd/yyyy");
     String stringDate = DateFor.format(date);
 
     String strDateFormat = "hh:mm:ss a";

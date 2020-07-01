@@ -4,83 +4,60 @@
     android:layout_height="match_parent"
     android:background="@color/light_blue">
 
-    <RelativeLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Calories Counter History"
+        android:textSize="24dp" />
+
+    <ListView
+        android:id="@+id/cclistView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="23dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="Calories Counter History"
-                android:textSize="24dp" />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
+        android:layout_height="500dp"
+        android:layout_marginTop="100dp">
+    </ListView>
 
     <TextView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:text="\tDate" />
 
+    <TextView
+        android:id="@+id/dateTextViewCC"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="60dp"
+        android:text="\t\t\tMeal Descriptions" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="130dp"
-        android:layout_marginLeft="50dp"
-        android:text="Date" />
-
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="130dp"
-        android:layout_marginLeft="200dp"
-        android:text="Meal" />
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="130dp"
         android:layout_marginLeft="300dp"
+        android:layout_marginTop="60dp"
         android:text="Calories" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
 
-            <ListView
-                android:id="@+id/cclistView"
-                android:layout_width="match_parent"
-                android:layout_height="414dp"
-                android:layout_marginTop="170dp">
-
-            </ListView>
-        </LinearLayout>
-    </ScrollView>
 
     <Button
         android:id="@+id/CCGoBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="620dp"
         android:backgroundTint="#00FFFFFF"
         android:text="@string/back_character"
@@ -90,9 +67,9 @@
         android:id="@+id/CCNextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="280dp"
+        android:layout_marginLeft="170dp"
         android:layout_marginTop="620dp"
-        android:layout_toRightOf="@+id/RTGoBackButton"
+        android:layout_toRightOf="@+id/CCGoBackButton"
         android:backgroundTint="#00FFFFFF"
         android:text="@string/next_character"
         android:textSize="24sp" />

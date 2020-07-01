@@ -10,8 +10,6 @@ public class UserWC {
     private int rep2;
     private int rep3;
 
-
-
     public UserWC() {
         // no arg constructor
     }
@@ -25,7 +23,6 @@ public class UserWC {
         this.rep3 = rep3;
 
     }
-
 
     public Date getDate() {
         return date;
