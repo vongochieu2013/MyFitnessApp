@@ -27,7 +27,7 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="539dp"
+        android:layout_height="500dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="100dp" />
@@ -77,23 +77,26 @@
         android:fontFamily="@font/bangers"
         android:text="Distance\n\t(mile)" />
 
-    <ImageButton
+    <Button
         android:id="@+id/RTGoBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="650dp"
+        android:layout_marginTop="620dp"
         android:backgroundTint="#00FFFFFF"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+        android:text="@string/back_character"
+        android:textSize="24sp"/>
 
-    <ImageButton
+    <Button
         android:id="@+id/RTNextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="650dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="620dp"
         android:layout_toRightOf="@+id/RTGoBackButton"
         android:backgroundTint="#00FFFFFF"
-        app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+        android:text="@string/next_character"
+        android:textSize="24sp"/>
+
 
 </RelativeLayout>
