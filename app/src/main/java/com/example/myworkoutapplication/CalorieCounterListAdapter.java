@@ -34,7 +34,7 @@ public class CalorieCounterListAdapter extends ArrayAdapter<UserCC> {
         String stringcals = Integer.toString(cals);
 
         Date date = getItem(position).getDate();
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat DateFor = new SimpleDateFormat("MM/dd/yyyy");
         String stringDate = DateFor.format(date);
 
         String strDateFormat = "hh:mm:ss a";

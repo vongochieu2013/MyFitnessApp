@@ -15,7 +15,7 @@ public class WorkoutCompanionFragment extends Fragment {
     private CardView pullButton;
     private CardView pushButton;
     private CardView legsButton;
-    private String woType = "";
+    private String woType;
 
    
 
@@ -59,7 +59,7 @@ public class WorkoutCompanionFragment extends Fragment {
     }
 
     public void replaceFragment() { // replaces fragment and sends workout type to sets and reps frag
-        Fragment wcsrfrag = new WC_sets_reps_fragment();
+        Fragment wcsrfrag = new WCSetsRepsFragment();
         final Bundle bundle = new Bundle();
         bundle.putString("woType", woType);
         wcsrfrag.setArguments(bundle);
