@@ -8,37 +8,31 @@
     tools:context=".WorkoutCompanionFragment"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Workout Companion"
-            android:textSize="30sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <GridLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Workout Companion"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
         android:layout_marginTop="70dp"
         android:alignmentMode="alignMargins"
-        android:columnCount="2"
-        android:columnOrderPreserved="false"
-        android:rowCount="4"
         android:verticalScrollbarPosition="defaultPosition">
 
 
         <androidx.cardview.widget.CardView
             android:id="@+id/PushButton"
-            android:layout_width="170dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_margin="15dp"
+            android:layout_gravity="center_horizontal"
             android:clickable="true"
             app:cardBackgroundColor="#0036DFCF"
             app:cardCornerRadius="12dp"
@@ -46,17 +40,17 @@
 
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center_horizontal|center_vertical"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="10dp">
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/ic_baseline_add_24" />
+                    android:src="@drawable/push_image" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -71,12 +65,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/PullButton"
-            android:layout_width="170dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_margin="15dp"
             android:clickable="true"
             app:cardBackgroundColor="#00FFFFFF"
+            android:layout_gravity="center_horizontal"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
 
@@ -89,17 +84,17 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_home_24" />
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/pull_image" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="pull"
+                    android:text="Pull"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -108,10 +103,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/LegsButton"
-            android:layout_width="170dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_margin="15dp"
+            android:layout_gravity="center_horizontal"
             android:clickable="true"
             app:cardBackgroundColor="#00FFFFFF"
             app:cardCornerRadius="12dp"
@@ -129,7 +125,7 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/ic_baseline_fastfood_24" />
+                    android:src="@drawable/legs_image" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -142,6 +138,7 @@
 
         </androidx.cardview.widget.CardView>
 
-    </GridLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>

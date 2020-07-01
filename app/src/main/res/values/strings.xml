@@ -3,12 +3,8 @@
   <string name="check_box">com.example.myworkoutapplication.check_box</string>
   <string name="username">com.example.myworkoutapplication.username</string>
   <string name="password">com.example.myworkoutapplication.password</string>
-
-  <string-array name="mealType">
-    <item>Breakfast</item>
-    <item>Lunch</item>
-    <item>Dinner</item>
-  </string-array>
+  <string name="back_character"> &#60;</string>
+  <string name="next_character"> &#62;</string>
 
   <string-array name="workoutType">
     <item>Walk</item>
