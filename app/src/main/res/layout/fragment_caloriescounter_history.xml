@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_blue">
@@ -9,9 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -21,50 +22,79 @@
                 android:fontFamily="@font/open_sans_bold"
                 android:text="Calories Counter History"
                 android:textSize="24dp" />
+
         </RelativeLayout>
+
     </RelativeLayout>
 
 
+    <TextView
 
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="150dp">
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="50dp"
+        android:text="Date" />
 
-        <TextView
-            android:id="@+id/text_view_data"
-            android:layout_width="wrap_content"
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="200dp"
+        android:text="Meal" />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="300dp"
+        android:text="Calories" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:textSize="20sp" />
-    </androidx.core.widget.NestedScrollView>
+            android:orientation="vertical" >
 
+            <ListView
+                android:id="@+id/cclistView"
+                android:layout_width="match_parent"
+                android:layout_height="414dp"
+                android:layout_marginTop="170dp">
 
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/CCGoBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="620dp"
         android:backgroundTint="#00FFFFFF"
         android:text="@string/back_character"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/CCNextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="170dp"
+        android:layout_marginLeft="280dp"
         android:layout_marginTop="620dp"
-        android:layout_toRightOf="@+id/CCGoBackButton"
+        android:layout_toRightOf="@+id/RTGoBackButton"
         android:backgroundTint="#00FFFFFF"
         android:text="@string/next_character"
-        android:textSize="24sp"/>
-
+        android:textSize="24sp" />
 
 </RelativeLayout>

@@ -16,7 +16,7 @@ public class UserWC {
         // no arg constructor
     }
 
-    public UserWC(String workoutType, String workoutDesc, Date date, int rep1, int rep2, int rep3) {
+    public UserWC(Date date, String workoutType, String workoutDesc, int rep1, int rep2, int rep3) {
         this.date = date;
         this.workoutType = workoutType;
         this.workoutDesc = workoutDesc;
