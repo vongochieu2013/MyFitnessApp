@@ -9,11 +9,11 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="605dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/WCSRheader"
@@ -25,24 +25,39 @@
                 android:textStyle="bold" />
 
         </TableRow>
-
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/WCSRheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bangers"
                 android:text="Workout Description: "
-                android:textSize="18dp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/WCSRdesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/bangers"
                 android:hint="Workout name"
                 android:inputType="textPersonName" />
         </TableRow>
@@ -55,6 +70,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bangers"
                 android:text="Set 1:  "
                 android:textAlignment="center"
                 android:textSize="20dp" />
@@ -64,6 +80,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/bangers"
                 android:hint="Enter reps"
                 android:inputType="textPersonName" />
 
@@ -76,6 +93,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bangers"
                 android:text="Set 2:  "
                 android:textAlignment="center"
                 android:textSize="20dp" />
@@ -85,6 +103,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/bangers"
                 android:hint="Enter reps"
                 android:inputType="textPersonName" />
 
@@ -92,12 +111,13 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bangers"
                 android:text="Set 3:  "
                 android:textAlignment="center"
                 android:textSize="20dp" />
@@ -107,6 +127,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/bangers"
                 android:hint="Enter reps"
                 android:inputType="textPersonName" />
 
@@ -114,15 +135,16 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/WCSRsubmitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/bangers"
                 android:text="Submit"
-                android:textSize="24sp"
-                android:background="@drawable/btn_bg"/>
+                android:textSize="24sp" />
 
         </TableRow>
 

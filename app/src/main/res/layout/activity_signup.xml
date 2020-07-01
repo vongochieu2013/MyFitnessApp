@@ -39,8 +39,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers"
+            android:inputType="textEmailAddress"
             android:hint="Email"
-            android:inputType="textEmailAddress">
+            android:textColor="#000000"
+            android:textColorHint="#000000">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -57,8 +60,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers"
             android:hint="Full Name"
-            android:inputType="text">
+            android:inputType="text"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            >
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -78,8 +85,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers"
             android:hint="Password"
-            android:inputType="textPassword">
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:textColorHint="#000000">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -96,6 +106,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers"
             android:hint="Age"
             android:inputType="number">
 
@@ -115,6 +126,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers"
             android:hint="Weight in pound"
             android:inputType="number">
 
@@ -132,6 +144,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bangers"
             android:hint="Calories you eat per day?"
             android:inputType="number">
 
@@ -145,7 +158,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/caloriesTextInput"
         android:layout_marginTop="10dp"
-        android:text = "Confirm"
-        android:background="@drawable/btn_bg"/>
+        android:background="@drawable/btn_bg"
+        android:fontFamily="@font/bangers"
+        android:text="I'm ready!"
+        android:textSize="24sp" />
 
 </RelativeLayout>

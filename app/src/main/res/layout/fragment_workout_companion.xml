@@ -40,7 +40,7 @@
             android:layout_rowWeight="1"
             android:layout_margin="15dp"
             android:clickable="true"
-            app:cardBackgroundColor="#36DFCF"
+            app:cardBackgroundColor="#0036DFCF"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
 
@@ -76,7 +76,7 @@
             android:layout_rowWeight="1"
             android:layout_margin="15dp"
             android:clickable="true"
-            app:cardBackgroundColor="#36DFCF"
+            app:cardBackgroundColor="#00FFFFFF"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
 
@@ -92,6 +92,7 @@
                 <ImageButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#00FFFFFF"
                     android:src="@drawable/ic_baseline_home_24" />
 
                 <TextView
@@ -112,7 +113,7 @@
             android:layout_rowWeight="1"
             android:layout_margin="15dp"
             android:clickable="true"
-            app:cardBackgroundColor="#36DFCF"
+            app:cardBackgroundColor="#00FFFFFF"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
 
