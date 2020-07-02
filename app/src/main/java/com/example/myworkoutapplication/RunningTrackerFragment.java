@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Date;
 
-public class StartWorkoutFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class RunningTrackerFragment extends Fragment implements AdapterView.OnItemSelectedListener {
   private Chronometer chronometer;
   private Button startButton;
   private Button pauseButton;
@@ -84,7 +84,13 @@ public class StartWorkoutFragment extends Fragment implements AdapterView.OnItem
     confirmDistanceButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        double distance = Double.parseDouble(distanceWorkout.getText().toString().trim());
+        double distance ;
+        if( distanceWorkout.getText().toString().length() <= 0){
+          distance = 0;
+        } else {
+          distance = Double.parseDouble(distanceWorkout.getText().toString().trim());
+        }
+
         Date date = new Date();
         String resultText = "Running Summary:\n\tDate: " + date + "\n\tTime: " + chronometerText +
                             "\n\tWorkout Type: " + workoutType + "\n\tDistance: " + distance + " miles";
