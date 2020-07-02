@@ -21,7 +21,6 @@
             android:id="@+id/CCtextView4"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-
             android:text="TextView" />
     </LinearLayout>
 
@@ -30,6 +29,7 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_weight="37"
+        android:textAlignment="center"
         android:text="TextView"
      />
 
