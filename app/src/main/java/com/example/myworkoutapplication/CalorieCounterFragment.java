@@ -24,7 +24,6 @@ import java.util.Date;
 public class CalorieCounterFragment extends Fragment {
 
   private Date currentTime = Calendar.getInstance().getTime();
-  private TextView tvOutput1;
   private EditText etMealDescriptionCC;
   private EditText etCaloriesCC;
   private String mealDescription;
@@ -33,6 +32,11 @@ public class CalorieCounterFragment extends Fragment {
   private Button submitButton;
   private FirebaseFirestore db = FirebaseFirestore.getInstance();
   private User currentUser;
+  private TextView dailyCaloriesCC;
+  private TextView goalCaloriesCC;
+  private TextView passGoalText;
+  private TextView dailyCaloriesTextView;
+  private TextView goalCaloriesTextView;
   private CollectionReference userCCHistory;
 
   @Nullable
@@ -52,10 +56,13 @@ public class CalorieCounterFragment extends Fragment {
           caloriesDay = 0;
         }else { caloriesDay = Integer.parseInt(etCaloriesCC.getText().toString().trim()); }
 
-        String allInput =  currentTime + " - " + mealDescription + " " + caloriesDay + "\n\n" ;
-        tvOutput1.setText(allInput);
         setCC(mealDescription, caloriesDay, currentTime);
         checkForTotalCalories();
+        dailyCaloriesTextView.setVisibility(View.VISIBLE);
+        goalCaloriesTextView.setVisibility(View.VISIBLE);
+        passGoalText.setVisibility(View.VISIBLE);
+        goalCaloriesCC.setVisibility(View.VISIBLE);
+        dailyCaloriesCC.setVisibility(View.VISIBLE);
       }
     });
     return root;
@@ -63,9 +70,18 @@ public class CalorieCounterFragment extends Fragment {
   }
 
   public void setData(View root) {
-    tvOutput1 = root.findViewById(R.id.CCtextView);
     etMealDescriptionCC = root.findViewById(R.id.mealDescriptionCCText);
     etCaloriesCC = root.findViewById(R.id.caloriesCCText);
+    dailyCaloriesCC = root.findViewById(R.id.dailyCaloriesCC);
+    goalCaloriesCC = root.findViewById(R.id.goalCaloriesCC);
+    passGoalText = root.findViewById(R.id.passGoalText);
+    dailyCaloriesTextView = root.findViewById(R.id.dailyCaloriesTextView);
+    goalCaloriesTextView = root.findViewById(R.id.goalCaloriesTextView);
+    dailyCaloriesTextView.setVisibility(View.INVISIBLE);
+    goalCaloriesTextView.setVisibility(View.INVISIBLE);
+    passGoalText.setVisibility(View.INVISIBLE);
+    goalCaloriesCC.setVisibility(View.INVISIBLE);
+    dailyCaloriesCC.setVisibility(View.INVISIBLE);
   }
 
   public void setCC(String mealDescription, int caloriesPerDay, Date date) {
@@ -87,6 +103,7 @@ public class CalorieCounterFragment extends Fragment {
           UserCC userHistory = documentSnapshot.toObject(UserCC.class);
           Date currentDate = userHistory.getDate();
           int currentCalories = userHistory.getCalories();
+
           Date date = new Date();
           SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
           String stringCurrentDate = DateFor.format(date); // It will be the current date.
@@ -96,12 +113,14 @@ public class CalorieCounterFragment extends Fragment {
             totalCalories[0] += currentCalories;
           }
         }
+        goalCaloriesCC.setText(Integer.toString(userCaloriesGoal));
+        dailyCaloriesCC.setText(Integer.toString(totalCalories[0]));
         if (totalCalories[0] >= userCaloriesGoal) {
-          String result = String.format("You passed the goal for today since %d > %d", totalCalories[0], userCaloriesGoal);
-          Toast.makeText(getContext(), result, Toast.LENGTH_LONG).show();
+          String result = "You passed the calories goal for today!";
+          passGoalText.setText(result);
         } else {
-          String result = String.format("You failed the goal for today since %d < %d", totalCalories[0], userCaloriesGoal);
-          Toast.makeText(getContext(), result, Toast.LENGTH_LONG).show();
+          String result = "You didn't reach the calories goal for today!";
+          passGoalText.setText(result);
         }
       }
     });

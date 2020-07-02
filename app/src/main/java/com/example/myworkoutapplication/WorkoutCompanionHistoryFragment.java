@@ -38,11 +38,10 @@ public class WorkoutCompanionHistoryFragment extends Fragment {
     goBackButton = root.findViewById(R.id.WCGoBackButton);
     setData(root);
     userWC
-            .orderBy(DATE, Query.Direction.DESCENDING)
-            .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+      .orderBy(DATE, Query.Direction.DESCENDING)
+      .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
       @Override
       public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
           UserWC userwc = documentSnapshot.toObject(UserWC.class);
           wcList.add(userwc);

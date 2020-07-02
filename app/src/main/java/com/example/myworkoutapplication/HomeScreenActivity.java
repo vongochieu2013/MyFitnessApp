@@ -27,7 +27,7 @@ public class HomeScreenActivity extends AppCompatActivity {
             selectedFragment = new CalorieCounterFragment();
             break;
           case R.id.nav_runningtracker:
-            selectedFragment = new StartWorkoutFragment();
+            selectedFragment = new RunningTrackerFragment();
             break;
           case R.id.nav_workoutcompanion:
             selectedFragment = new WorkoutCompanionFragment();

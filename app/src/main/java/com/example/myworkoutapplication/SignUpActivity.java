@@ -51,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
     confirmButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        if (!validateEmail() | !validateName() | !validatePassword() | !validateAge() | !validateWeight()) {
+        if (!validateEmail() | !validateName() | !validatePassword() | !validateAge() | !validateWeight() | !validateCalories()) {
           return;
         }
         Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
@@ -74,21 +74,6 @@ public class SignUpActivity extends AppCompatActivity {
     caloriesTextInput = findViewById(R.id.caloriesTextInput);
   }
 
-  public boolean validateExistedEmail() {
-    String emailInput = emailTextInput.getEditText().getText().toString().trim();
-    final boolean[] result = new boolean[1];
-    db.collection("users").document(emailInput).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-      @Override
-      public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-        if (Objects.requireNonNull(task.getResult()).exists()) {
-          result[0] = false;
-        } else {
-          result[0] = true;
-        }
-      }
-    });
-    return result[0];
-  }
 
   public boolean validateEmail() {
     String emailInput = emailTextInput.getEditText().getText().toString().trim();
@@ -152,6 +137,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
   }
 
+  public boolean validateCalories() {
+    String caloriesInput = caloriesTextInput.getEditText().getText().toString().trim();
+    if (caloriesInput.isEmpty()) {
+      caloriesTextInput.setError("Field can't be empty");
+      return false;
+    } else {
+      caloriesTextInput.setError(null);
+      return true;
+    }
+  }
+
   public User setUpUser() {
     final String emailInput = emailTextInput.getEditText().getText().toString().trim();
     final String fullNameInput = fullNameTextInput.getEditText().getText().toString().trim();
@@ -167,57 +163,6 @@ public class SignUpActivity extends AppCompatActivity {
 }
 
 
-    /*
- auth
-          .createUserWithEmailAndPassword("chan345@gmail.com", "chan@123")
-          .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult result) {
-              Log.w("hieu", "result=" + result.toString());
-              Log.w("hieu", "current user: " + auth.getCurrentUser().getUid());
-              Log.w("hieu", "result user: " + result.getUser().getUid());
-              String uid = result.getUser().getUid();
-
-
-
-              Map<String, Object> data = new HashMap<>();
-              data.put("name", "my-name");
-              data.put("email", "my-email@gmail.com");
-
-              Log.w("hieu", Thread.currentThread().getName());
-              CollectionReference c = db.collection("users");
-              Log.w("hieu", c.getPath());
-              c.document("wtf")
-                .set(data)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                  @Override
-                  public void onSuccess(Void aVoid) {
-                    Log.w("hieu", "again " + Thread.currentThread().getName());
-                  }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                  @Override
-                  public void onFailure(@NonNull Exception e) {
-                    Log.w("hieu", "why" + e.getMessage());
-                  }
-                })
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                  @Override
-                  public void onComplete(@NonNull Task<Void> task) {
-                    Log.w("hieu", "complete: " + task.isSuccessful());
-                  }
-                });
-            }
-          })
-          .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-              Log.e("hieu", "what: " + e.getMessage());
-            }
-          });
-      }
-    });
-  */
 
 
 
