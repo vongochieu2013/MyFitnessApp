@@ -119,7 +119,16 @@
                 android:text="Submit"
                 android:textSize="20sp" />
 
-
     </TableLayout>
+
+    <Button
+        android:id="@+id/WCSRGoBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="620dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="@string/back_character"
+        android:textSize="24sp"/>
 
 </RelativeLayout>

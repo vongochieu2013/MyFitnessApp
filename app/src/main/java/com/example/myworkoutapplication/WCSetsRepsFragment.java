@@ -3,13 +3,14 @@ package com.example.myworkoutapplication;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -18,16 +19,17 @@ import java.util.Date;
 
 
 public class WCSetsRepsFragment extends Fragment  {
-    private EditText description;
-    private EditText s1Reps;
-    private EditText s2Reps;
-    private EditText s3Reps;
-    private String WCdesc;
-    private String WCtype;
-    private int S1reps;
-    private int S2reps;
-    private int S3reps;
+    private EditText etDescription;
+    private EditText etS1Reps;
+    private EditText etS2Reps;
+    private EditText etS3Reps;
+    private String wcDesc;
+    private String wcType;
+    private int s1Reps;
+    private int s2Reps;
+    private int s3Reps;
     private Button wcsrSubmitButton;
+    private Button wcsrBackButton;
     private User currUser = MainActivity.getCurrentUser();
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -39,16 +41,36 @@ public class WCSetsRepsFragment extends Fragment  {
         setData(root);
         Bundle bundle = getArguments();
         if(bundle != null){
-            WCtype = bundle.getString("woType");
+            wcType = bundle.getString("woType");
         }
         wcsrSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WCdesc = description.getText().toString().trim();
-                S1reps = Integer.parseInt(s1Reps.getText().toString().trim());
-                S2reps = Integer.parseInt(s2Reps.getText().toString().trim());
-                S3reps = Integer.parseInt(s3Reps.getText().toString().trim());
-               setWClog(WCtype, WCdesc, currentTime, S1reps, S2reps, S3reps);
+                if(etDescription.getText().toString().length() <= 0){
+                    wcDesc = "";
+                }else{ wcDesc = etDescription.getText().toString().trim(); }
+
+                if(etS1Reps.getText().toString().length() <= 0) {
+                    s1Reps = 0;
+                }else {s1Reps = Integer.parseInt(etS1Reps.getText().toString().trim());}
+                if(etS2Reps.getText().toString().length() <= 0){
+                    s2Reps = 0;
+                }else{ s2Reps = Integer.parseInt(etS2Reps.getText().toString().trim()); }
+                if(etS3Reps.getText().toString().length() <= 0){
+                    s3Reps = 0;
+                }else{ s3Reps = Integer.parseInt(etS3Reps.getText().toString().trim()); }
+
+               setWClog(wcType, wcDesc, currentTime, s1Reps, s2Reps, s3Reps);
+            }
+        });
+
+        wcsrBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new WorkoutCompanionFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
             }
         });
 
@@ -56,11 +78,12 @@ public class WCSetsRepsFragment extends Fragment  {
     }
 
     public void setData(View root){
-        description = root.findViewById(R.id.WCSRdesc);
-        s1Reps = root.findViewById(R.id.s1reps);
-        s2Reps = root.findViewById(R.id.s2reps);
-        s3Reps = root.findViewById(R.id.s3reps);
+        etDescription = root.findViewById(R.id.WCSRdesc);
+        etS1Reps = root.findViewById(R.id.s1reps);
+        etS2Reps = root.findViewById(R.id.s2reps);
+        etS3Reps = root.findViewById(R.id.s3reps);
         wcsrSubmitButton = root.findViewById(R.id.WCSRsubmitButton);
+        wcsrBackButton = root.findViewById(R.id.WCSRGoBackButton);
     }
     public void setWClog(String workoutType, String workoutDesc, Date date, int rep1, int rep2, int rep3) {
         UserWC currWCUser = new UserWC();

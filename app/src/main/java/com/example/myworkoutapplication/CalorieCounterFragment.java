@@ -24,13 +24,13 @@ import java.util.Date;
 public class CalorieCounterFragment extends Fragment {
 
   private Date currentTime = Calendar.getInstance().getTime();
-  private TextView output1;
-  private EditText mealDescriptionCCText;
-  private EditText caloriesCCText;
+  private TextView tvOutput1;
+  private EditText etMealDescriptionCC;
+  private EditText etCaloriesCC;
   private String mealDescription;
   private int userCaloriesGoal;
   private int caloriesDay;
-  private Button butt1;
+  private Button submitButton;
   private FirebaseFirestore db = FirebaseFirestore.getInstance();
   private User currentUser;
   private CollectionReference userCCHistory;
@@ -40,14 +40,20 @@ public class CalorieCounterFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View root = inflater.inflate(R.layout.fragment_caloriecounter, container, false);
     setData(root);
-    butt1 = root.findViewById(R.id.submitCCButton);
-    butt1.setOnClickListener(new View.OnClickListener() {
+    submitButton = root.findViewById(R.id.submitCCButton);
+    submitButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        mealDescription = mealDescriptionCCText.getText().toString().trim();
-        caloriesDay = Integer.parseInt(caloriesCCText.getText().toString().trim());
+        
+        if(etMealDescriptionCC.getText().toString().length() <= 0){
+          mealDescription = "";
+        }else { mealDescription = etMealDescriptionCC.getText().toString().trim(); }
+        if(etCaloriesCC.getText().toString().length() <= 0){
+          caloriesDay = 0;
+        }else { caloriesDay = Integer.parseInt(etCaloriesCC.getText().toString().trim()); }
+
         String allInput =  currentTime + " - " + mealDescription + " " + caloriesDay + "\n\n" ;
-        output1.setText(allInput);
+        tvOutput1.setText(allInput);
         setCC(mealDescription, caloriesDay, currentTime);
         checkForTotalCalories();
       }
@@ -57,9 +63,9 @@ public class CalorieCounterFragment extends Fragment {
   }
 
   public void setData(View root) {
-    output1 = root.findViewById(R.id.CCtextView);
-    mealDescriptionCCText = root.findViewById(R.id.mealDescriptionCCText);
-    caloriesCCText = root.findViewById(R.id.caloriesCCText);
+    tvOutput1 = root.findViewById(R.id.CCtextView);
+    etMealDescriptionCC = root.findViewById(R.id.mealDescriptionCCText);
+    etCaloriesCC = root.findViewById(R.id.caloriesCCText);
   }
 
   public void setCC(String mealDescription, int caloriesPerDay, Date date) {
