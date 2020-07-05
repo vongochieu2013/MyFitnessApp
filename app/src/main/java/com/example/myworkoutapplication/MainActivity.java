@@ -116,13 +116,6 @@ public class MainActivity extends AppCompatActivity {
     if (passwordInput.equals(correctPassword)) {
       Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
       currentUser = document.toObject(User.class);
-      /*
-      currentUser = new User(document.getData().get(EMAIL).toString()
-        ,document.getData().get(FULLNAME).toString()
-        , document.getData().get(PASSWORD).toString()
-        , document.getData().get(AGE).toString());
-
-       */
       Intent intent = new Intent(getApplicationContext(), HomeScreenActivity.class);
       startActivity(intent);
     } else {
@@ -144,71 +137,3 @@ public class MainActivity extends AppCompatActivity {
   }
 
 }
-  /*
-
-    /*
-        @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        accountSet.add("admin//admin"); //Admin account: username: admin // password: admin
-        SignInButton = findViewById(R.id.SignInButton);
-        SignUpButton = findViewById(R.id.SignUpButton);
-        usernameMain = findViewById(R.id.usernameMain);
-        passwordMain = findViewById(R.id.passwordMain);
-
-        mCheckBox = findViewById(R.id.checkBox);
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mPreferences.edit();
-
-        checkSharedPreferences();
-
-        SignUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-                startActivityForResult(intent, 1);
-            }
-        });
-
-        SignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mCheckBox.isChecked()) {
-                    mEditor.putString(getString(R.string.check_box), "True");
-                    mEditor.commit();
-
-                    String name = usernameMain.getEditText().getText().toString().trim();
-                    mEditor.putString(getString(R.string.username), name);
-                    mEditor.commit();
-
-                    String password = passwordMain.getEditText().getText().toString().trim();
-                    mEditor.putString(getString(R.string.password), password);
-                    mEditor.commit();
-                } else {
-                    mEditor.putString(getString(R.string.check_box), "False");
-                    mEditor.commit();
-
-                    mEditor.putString(getString(R.string.username), "");
-                    mEditor.commit();
-
-                    String password = passwordMain.getEditText().getText().toString().trim();
-                    mEditor.putString(getString(R.string.password), "");
-                    mEditor.commit();
-                }
-
-                if (!validateInfo()) {
-                    String invalid = "Incorrect Username or Password.\nPlease try again.";
-                    Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Intent intent = new Intent(getApplicationContext(), HomeScreenActivity.class);
-                intent.putExtra("email", emailInput);
-                intent.putExtra("username", usernameInput);
-                // intent.putExtra("password", passwordInput);
-                startActivity(intent);
-            }
-        });
-
-    }
-     */

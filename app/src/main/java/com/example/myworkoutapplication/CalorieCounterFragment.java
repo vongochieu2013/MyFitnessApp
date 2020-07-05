@@ -37,6 +37,8 @@ public class CalorieCounterFragment extends Fragment {
   private TextView passGoalText;
   private TextView dailyCaloriesTextView;
   private TextView goalCaloriesTextView;
+  private TextView dateTextView;
+  private TextView dateCC;
   private CollectionReference userCCHistory;
 
   @Nullable
@@ -63,6 +65,8 @@ public class CalorieCounterFragment extends Fragment {
         passGoalText.setVisibility(View.VISIBLE);
         goalCaloriesCC.setVisibility(View.VISIBLE);
         dailyCaloriesCC.setVisibility(View.VISIBLE);
+        dateTextView.setVisibility(View.VISIBLE);
+        dateCC.setVisibility(View.VISIBLE);
       }
     });
     return root;
@@ -77,7 +81,11 @@ public class CalorieCounterFragment extends Fragment {
     passGoalText = root.findViewById(R.id.passGoalText);
     dailyCaloriesTextView = root.findViewById(R.id.dailyCaloriesTextView);
     goalCaloriesTextView = root.findViewById(R.id.goalCaloriesTextView);
+    dateTextView = root.findViewById(R.id.dateTextView);
+    dateCC = root.findViewById(R.id.dateCC);
     dailyCaloriesTextView.setVisibility(View.INVISIBLE);
+    dateTextView.setVisibility(View.INVISIBLE);
+    dateCC.setVisibility(View.INVISIBLE);
     goalCaloriesTextView.setVisibility(View.INVISIBLE);
     passGoalText.setVisibility(View.INVISIBLE);
     goalCaloriesCC.setVisibility(View.INVISIBLE);
@@ -105,10 +113,10 @@ public class CalorieCounterFragment extends Fragment {
           int currentCalories = userHistory.getCalories();
 
           Date date = new Date();
-          SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+          SimpleDateFormat DateFor = new SimpleDateFormat("MM/dd/yyyy");
           String stringCurrentDate = DateFor.format(date); // It will be the current date.
           String stringCCDate = DateFor.format(currentDate); // It is the time from the userHistory
-
+          dateCC.setText(stringCurrentDate);
           if (stringCurrentDate.equals(stringCCDate)) {
             totalCalories[0] += currentCalories;
           }
