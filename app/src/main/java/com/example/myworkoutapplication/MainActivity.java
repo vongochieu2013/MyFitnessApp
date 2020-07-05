@@ -7,17 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,14 +39,13 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     setUp();
 
-
-    
     signUpButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
       }
     });
+
     signInButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -71,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
                 validatePassword(passwordInput, correctPassword, document);
               } else {
                 emailMain.setError("Incorrect email. Please try again.");
+                attemptText.setText("Attempts remaining " + (--counter));
+                if (counter == 0) {
+                  signInButton.setEnabled(false);
+                }
               }
             } else {
               Log.d(TAG, "get failed with ", task.getException());

@@ -2,23 +2,14 @@ package com.example.myworkoutapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -51,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
     confirmButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        if (!validateEmail() | !validateName() | !validatePassword() | !validateAge() | !validateWeight() | !validateCalories()) {
+        if (!validateEmail()  | !validateName() | !validatePassword() | !validateAge() | !validateWeight() | !validateCalories()) {
           return;
         }
         Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
@@ -87,7 +78,6 @@ public class SignUpActivity extends AppCompatActivity {
       emailTextInput.setError(null);
       return true;
     }
-
   }
 
   public boolean validateName() {
@@ -109,6 +99,9 @@ public class SignUpActivity extends AppCompatActivity {
     } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
       passwordTextInput.setError("Password must contain at least one alphabet letter and at least 6 characters");
       return false;
+    } else if (passwordInput.length() > 20) {
+      passwordTextInput.setError("Password cannot be more than 20 characters");
+      return false;
     } else {
       passwordTextInput.setError(null);
       return true;
@@ -119,6 +112,9 @@ public class SignUpActivity extends AppCompatActivity {
     String ageInput = ageTextInput.getEditText().getText().toString().trim();
     if (ageInput.isEmpty()) {
       ageTextInput.setError("Field can't be empty");
+      return false;
+    } else if (Integer.parseInt(ageInput) < 0) {
+      ageTextInput.setError("The age cannot be less than zero");
       return false;
     } else {
       ageTextInput.setError(null);
@@ -131,6 +127,9 @@ public class SignUpActivity extends AppCompatActivity {
     if (weightInput.isEmpty()) {
       weightTextInput.setError("Field can't be empty");
       return false;
+    } else if (Integer.parseInt(weightInput) < 0) {
+      ageTextInput.setError("The weight cannot be less than zero");
+      return false;
     } else {
       weightTextInput.setError(null);
       return true;
@@ -141,6 +140,9 @@ public class SignUpActivity extends AppCompatActivity {
     String caloriesInput = caloriesTextInput.getEditText().getText().toString().trim();
     if (caloriesInput.isEmpty()) {
       caloriesTextInput.setError("Field can't be empty");
+      return false;
+    } else if (Integer.parseInt(caloriesInput) < 0) {
+      ageTextInput.setError("The weight cannot be less than zero");
       return false;
     } else {
       caloriesTextInput.setError(null);
