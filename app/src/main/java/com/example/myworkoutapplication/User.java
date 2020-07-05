@@ -1,6 +1,6 @@
 package com.example.myworkoutapplication;
 
-public class User {
+public class User implements PotentialUsers {
 
   private String email;
   private String fullName;
