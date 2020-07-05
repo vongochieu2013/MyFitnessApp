@@ -55,7 +55,8 @@
             android:id="@+id/caloriesCCText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="How many calories?" />
+            android:hint="How many calories?"
+            android:inputType="number" />
 
         <TextView
             android:id="@+id/textView7"
